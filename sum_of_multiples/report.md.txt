@@ -1,0 +1,60 @@
+# Sum of Multiples (Codewars Kata)
+
+## Description
+
+This exercise solves the following problem:
+
+> **Find the sum of all multiples of `n` below `m`.**
+
+---
+
+## Rules
+
+- `n` and `m` are **natural numbers** (positive integers).
+- **`m` is excluded** (if `m` is a multiple of `n`, do not include it in the sum).
+- If either `n` or `m` is **less than or equal to 0**, return **"INVALID"**.
+- If **`n >= m`**, return **0**.
+
+---
+
+## Examples
+
+| Input               | Output   |
+|-------------------|----------|
+| `sumMul(2, 9)`     | 20       |
+| `sumMul(3, 13)`    | 30       |
+| `sumMul(4, 123)`   | 1860     |
+| `sumMul(4, -7)`    | "INVALID"|
+| `sumMul(4, 4)`     | 0        |
+| `sumMul(5, 2)`     | 0        |
+| `sumMul(0, 10)`    | "INVALID"|
+
+---
+
+## Solution
+
+This solution uses a mathematical formula to avoid loops and optimize performance.
+
+### Formula:
+
+\[
+S = n \times \left( \frac{k \times (k+1)}{2} \right)
+\]
+
+Where:
+
+- \( k = \left\lfloor \frac{m-1}{n} \right\rfloor \)  
+  (Number of multiples of `n` below `m`)
+
+---
+
+## Python Implementation
+
+```python
+def sumMul(n, m):
+    if n <= 0 or m <= 0:
+        return "INVALID"
+    if n >= m:
+        return 0
+    max_multiple = (m - 1) // n
+    return n * max_multiple * (max_multiple + 1) // 2
